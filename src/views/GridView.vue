@@ -14,7 +14,7 @@ onMounted(async () => {
 
 <template>
     <RecycleScroller v-slot="{ item }" :items="events" :item-size="48" key-field="0">
-        <div class="active:bg-primary-10 mr-2 mt-2 flex h-10 items-center overflow-hidden overflow-ellipsis whitespace-nowrap rounded-sm px-2">
+        <div>
             {{ item[0] }}
         </div>
     </RecycleScroller>
