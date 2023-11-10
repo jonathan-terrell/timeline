@@ -7,12 +7,21 @@ import { useMainStore } from '@/stores/main';
 
 <template>
     <RecycleScroller v-slot="{ item }" :items="useMainStore().eventConfigs" :item-size="24" key-field="id">
-        <div class="flex">
+        <div class="flex gap-x-3">
+            <div>
+                {{ item.id }}
+            </div>
+            <div>
+                {{ item.personId }}
+            </div>
             <div>
                 {{ item.start }}
             </div>
             <div>
-                {{ item.id }}
+                {{ item.end }}
+            </div>
+            <div>
+                {{ item.typeId }}
             </div>
             <div>
                 {{ buildFullName(item) }}

@@ -5,7 +5,7 @@ import { createPinia } from 'pinia';
 
 import App from './App.vue';
 import router from './router';
-import type { EventConfig } from './stores/main';
+import type { PersonConfig } from './stores/main';
 
 const app = createApp(App);
 
@@ -14,4 +14,4 @@ app.use(router);
 
 app.mount('#app');
 
-export const buildFullName = (event: EventConfig): string => `${event.lastName}, ${event.firstName}`;
+export const buildFullName = (event: PersonConfig): string => `${event.lastName}, ${event.firstName}`;
