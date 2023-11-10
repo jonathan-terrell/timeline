@@ -14,4 +14,4 @@ app.use(router);
 
 app.mount('#app');
 
-export const buildFullName = (event: PersonConfig): string => `${event.lastName}, ${event.firstName}`;
+export const buildFullName = (event: PersonConfig): string => `${event.id} - ${event.lastName}, ${event.firstName}`;

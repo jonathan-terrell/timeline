@@ -30,8 +30,20 @@ const buildEvents = () => {
             end: eventConfig.end || undefined
         });
     }
-    new Timeline(container.value!, eventItems.value, { height: '100%', verticalScroll: true, zoomable: false });
+    new Timeline(container.value!, eventItems.value, {
+        end: new Date(),
+        height: '100%',
+        horizontalScroll: true,
+        max: new Date(),
+        min: '1750-01-01',
+        order: comparePeople,
+        stack: false,
+        verticalScroll: true,
+        zoomKey: 'ctrlKey'
+    });
 };
+
+const comparePeople = (left: DataItem, right: DataItem) => right.id - left.id;
 </script>
 
 <template>
