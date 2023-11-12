@@ -1,45 +1,27 @@
 <script setup lang="ts">
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css';
-import { buildFullName } from '@/main';
 import { RecycleScroller } from 'vue-virtual-scroller';
-import { useMainStore } from '@/stores/main';
-import { computed, onMounted, watch } from 'vue';
+import { buildFullName, dateDiffDays, formatDate } from '@/main';
+import { computed, onMounted, watch, type ComputedRef } from 'vue';
+import { type PersonConfig, useMainStore } from '@/stores/main';
 
-const eventConfigs = computed(() => useMainStore().eventConfigs);
-watch(eventConfigs, () => doIt());
+const personConfigs: ComputedRef<PersonConfig[]> = computed((): PersonConfig[] => useMainStore().personConfigs);
+watch(personConfigs, () => doIt());
 
 onMounted(() => doIt());
 
-const doIt = () => {
-    const mainStore = useMainStore();
-    if (mainStore.eventConfigs.length === 0) return;
-    const startYear = new Date(mainStore.eventConfigs[0].start || '').getFullYear();
-    const endYear = new Date().getFullYear() + 1;
-    console.log('eventConfigs', mainStore.eventConfigs, startYear, endYear, endYear - startYear);
-};
+const doIt = () => {};
 </script>
 
 <template>
-    <RecycleScroller v-slot="{ item }" :items="eventConfigs" :item-size="24" key-field="id">
+    <RecycleScroller v-slot="{ item }" :items="personConfigs" :item-size="24" key-field="id">
         <div class="flex gap-x-3">
-            <div>
-                {{ item.id }}
-            </div>
-            <div>
-                {{ item.personId }}
-            </div>
-            <div>
-                {{ item.start }}
-            </div>
-            <div>
-                {{ item.end }}
-            </div>
-            <div>
-                {{ item.typeId }}
-            </div>
-            <div>
-                {{ buildFullName(item) }}
-            </div>
+            <div class="w-8">{{ item.id }}</div>
+            <div class="w-8">{{ item.personId }}</div>
+            <div class="w-28">{{ formatDate(item.start) }}</div>
+            <div class="w-28">{{ formatDate(item.end) }}</div>
+            <div class="w-48">{{ buildFullName(item) }}</div>
+            <div class="w-28">{{ dateDiffDays(item.start, item.end) }}</div>
         </div>
     </RecycleScroller>
 </template>
