@@ -13,9 +13,9 @@ export interface PersonConfig {
 }
 
 export const useMainStore = defineStore('main', () => {
-    const maxEndDate: Ref<Date> = ref(new Date(new Date().getFullYear() + 1, 12, 31));
-    const minStartDate: Ref<Date> = ref(new Date());
-    const maxDurationDays: Ref<number> = ref(dateDiffDays(maxEndDate.value, minStartDate.value));
+    const maxEndDate: Ref<Date> = ref(new Date(new Date().getFullYear(), 11, 31));
+    const minStartDate: Ref<Date> = ref(new Date(new Date().getFullYear(), 0, 1));
+    const maxDurationDays: Ref<number> = ref(dateDiffDays(minStartDate.value, maxEndDate.value));
     const personConfigs: ShallowRef<PersonConfig[]> = shallowRef([]);
     return { minStartDate, maxDurationDays, maxEndDate, personConfigs };
 });

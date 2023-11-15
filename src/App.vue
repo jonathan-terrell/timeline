@@ -27,8 +27,8 @@ const buildPersonConfigs = (data: string[][]): void => {
     mainStore.personConfigs = personConfigs;
     if (personConfigs.length === 0) return;
 
-    mainStore.minStartDate = new Date(new Date(mainStore.personConfigs[0].start || '').getFullYear(), 1, 1);
-    console.log('eventConfigs', mainStore.personConfigs, mainStore.minStartDate, mainStore.maxEndDate, dateDiffDays(mainStore.minStartDate, mainStore.maxEndDate));
+    mainStore.minStartDate = new Date(new Date(mainStore.personConfigs[0].start || '').getFullYear(), 0, 1);
+    mainStore.maxDurationDays = dateDiffDays(mainStore.minStartDate, mainStore.maxEndDate);
 };
 
 const comparePersonConfigs = (left: string[], right: string[]) => {
@@ -37,13 +37,12 @@ const comparePersonConfigs = (left: string[], right: string[]) => {
 </script>
 
 <template>
-    <div class="flex h-full flex-col">
+    <div class="flex h-full flex-col overflow-x-scroll">
         <div class="flex gap-x-3">
             <RouterLink to="/">Home</RouterLink>
             <RouterLink to="/grid">Grid</RouterLink>
-            <RouterLink to="/vis">Vis</RouterLink>
         </div>
-        <div class="h-[calc(100%-24px)]">
+        <div class="h-[calc(100%-24px)]" style="width: 2000px">
             <RouterView />
         </div>
     </div>
